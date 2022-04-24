@@ -8,7 +8,7 @@ import { Doggo } from './api/doggo'
 const fetcher = (url: string) => fetch(url).then(res => res.json())
 
 const Home: NextPage = () => {
-  const { data, error } = useSWR<Doggo>('/api/doggo', fetcher)
+  const { data, error } = useSWR<Doggo>('http://localhost:3000/api/doggo', fetcher)
 
   return (
     <div className={styles.container}>
