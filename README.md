@@ -1,34 +1,52 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Polly Test
 
-## Getting Started
+Demo the features from [Polly.js](https://netflix.github.io/pollyjs) that let us
+record, replay, and stub HTTP interactions in our JavaScript applications.
 
-First, run the development server:
+This is a simple application that fetches an image of a dog 🐶 and shows its
+breed.
+
+## How to run the example
 
 ```bash
-npm run dev
-# or
-yarn dev
+$ git clone https://github.com/d4vsanchez/pollyjs-example.git
+$ cd pollyjs-example
+$ yarn
+$ yarn dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+And then go to [http://localhost:3000](http://localhost:3000)
 
-You can start editing the page by modifying `pages/index.tsx`. The page auto-updates as you edit the file.
+## How to test
 
-[API routes](https://nextjs.org/docs/api-routes/introduction) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.ts`.
+### Record the initial request
 
-The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/api-routes/introduction) instead of React pages.
+Remove the provided HAR files created by Polly:
 
-## Learn More
+```bash
+$ rm -r ./__tests__/__recordings__
+```
 
-To learn more about Next.js, take a look at the following resources:
+Run the server (we need to do the real HTTP requests):
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+```bash
+$ yarn dev
+```
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+In another tab, execute the tests:
 
-## Deploy on Vercel
+```bash
+$ yarn test
+```
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+It must re-create the `__recurring__` folder.
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+### Using the pre-made records
+
+No need to run the server, make sure it's turned-off. Execute the tests:
+
+```bash
+$ yarn test
+```
+
+It must work correctly.
