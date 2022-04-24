@@ -7,7 +7,7 @@ type DogResponse = {
   status: 'success';
 }
 
-type Doggo = {
+export type Doggo = {
   breed: string;
   imageUrl: string;
 }
@@ -20,7 +20,9 @@ export default async function handler(
   const doggoInformation = await response.json() as DogResponse;
 
   // Get the breed of the dog
-  const breed = doggoInformation.message.split('/')[4];
+  let breed = doggoInformation.message.split('/')[4];
+  breed = breed.replace('-', ' ');
+  breed = breed.slice(0, 1).toUpperCase() + breed.slice(1);
 
   res.status(200).json({ breed, imageUrl: doggoInformation.message });
 }
